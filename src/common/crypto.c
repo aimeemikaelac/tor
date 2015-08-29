@@ -138,6 +138,7 @@ static int crypto_early_initialized_ = 0;
 /** Boolean: has OpenSSL's crypto been initialized? */
 static int crypto_global_initialized_ = 0;
 
+
 /** Log all pending crypto errors at level <b>severity</b>.  Use
  * <b>doing</b> to describe our current activities.
  */

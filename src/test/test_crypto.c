@@ -13,6 +13,8 @@
 #include "crypto_curve25519.h"
 #include "crypto_ed25519.h"
 #include "ed25519_vectors.inc"
+#include "memmgr.h"
+#include "user_mmap_driver.h"
 
 #include <openssl/evp.h>
 
@@ -144,7 +146,11 @@ test_crypto_aes(void *arg)
   evaluate_evp_for_aes(use_evp);
   evaluate_ctr_for_aes();
 
-  data1 = tor_malloc(1024);
+  shared_memory shared_mem = getUioMemoryArea("qam", 8*1024*1024);
+  memmgr_init(shared_mem->ptr, 8*1024*1024, 0x1f101000);
+
+//  data1 = tor_malloc(1024);
+  data1 = memmgr_alloc(1024);
   data2 = tor_malloc(1024);
   data3 = tor_malloc(1024);
 
